@@ -85,7 +85,6 @@ install_ngrok(){
 	if [ ! -f "${_NGROK_BASE_PATH}/ngrok.zip" ];then
 		wget http://www.sunnyos.com/ngrok.zip
 	fi
-	cd
 	unzip ngrok.zip
 	export GOPATH=${_NGROK_BASE_PATH}
 	export NGROK_DOMAIN=$DOMAIN
