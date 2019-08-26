@@ -115,7 +115,7 @@ uninstall_ngrok(){
 compile_client(){
 	cd /usr/local/go/src
 	GOOS=$1 GOARCH=$2 ./make.bash
-	cd /usr/local/ngrok/
+	cd /usr/local/ngrok/ngrok-server/
 	GOOS=$1 GOARCH=$2 make release-client
 }
 
