@@ -82,8 +82,8 @@ install_ngrok(){
 	uninstall_ngrok
 	_NGROK_BASE_PATH="/usr/local/ngrok/ngrok-server/"
 	cd /usr/local
-	if [ ! -f "${_NGROK_BASE_PATH}/ngrok/ngrok.zip" ];then
-		cd ${_NGROK_BASE_PATH}/ngrok
+	if [ ! -f "${_NGROK_BASE_PATH}/ngrok.zip" ];then
+		cd ${_NGROK_BASE_PATH}
 		wget http://www.sunnyos.com/ngrok.zip
 	fi
 	unzip ngrok.zip
