@@ -104,7 +104,7 @@ install_ngrok(){
 	GOOS=$GOOS GOARCH=$GOARCH ./make.bash
 	cd ${_NGROK_BASE_PATH}/ngrok
 	GOOS=$GOOS GOARCH=$GOARCH make release-server
-	/usr/local/ngrok/ngrok-server/ngrok/bin/ngrokd -domain=$NGROK_DOMAIN -httpAddr=":80"
+#	/usr/local/ngrok/ngrok-server/ngrok/bin/ngrokd -domain=$NGROK_DOMAIN -httpAddr=":80"
 }
 
 # 卸载ngrok
@@ -211,7 +211,7 @@ case "$num" in
 		read domain
 		echo "启动端口"
 		read port
-		/usr/local/ngrok/bin/ngrokd -domain=$domain -httpAddr=":$port"
+		nohup /usr/local/ngrok/ngrok-server/bin/ngrokd -domain=$domain -httpAddr=":$port" /usr/local/ngrok/ngrok-server/out.log 2>&1 &
 	;;
 	[9] )
 		echo "输入启动域名"
