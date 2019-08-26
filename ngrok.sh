@@ -80,13 +80,14 @@ uninstall_go(){
 # 安装ngrok
 install_ngrok(){
 	uninstall_ngrok
+	_NGROK_BASE_PATH="/usr/local/ngrok/ngrok-server/"
 	cd /usr/local
-	if [ ! -f /usr/local/ngrok.zip ];then
-		cd /usr/local/
+	if [ ! -f "${_NGROK_BASE_PATH}/ngrok.zip" ];then
+		cd ${_NGROK_BASE_PATH}
 		wget http://www.sunnyos.com/ngrok.zip
 	fi
 	unzip ngrok.zip
-	export GOPATH=/usr/local/ngrok/
+	export GOPATH=${_NGROK_BASE_PATH}
 	export NGROK_DOMAIN=$DOMAIN
 	cd ngrok
 	openssl genrsa -out rootCA.key 2048
@@ -98,12 +99,12 @@ install_ngrok(){
 	cp server.crt assets/server/tls/snakeoil.crt
 	cp server.key assets/server/tls/snakeoil.key
 	# 替换下载源地址
-	sed -i 's#code.google.com/p/log4go#github.com/keepeye/log4go#' /usr/local/ngrok/src/ngrok/log/logger.go
+	sed -i 's#code.google.com/p/log4go#github.com/keepeye/log4go#' ${_NGROK_BASE_PATH}ngrok/src/ngrok/log/logger.go
 	cd /usr/local/go/src
 	GOOS=$GOOS GOARCH=$GOARCH ./make.bash
-	cd /usr/local/ngrok
+	cd ${_NGROK_BASE_PATH}/ngrok
 	GOOS=$GOOS GOARCH=$GOARCH make release-server
-	/usr/local/ngrok/bin/ngrokd -domain=$NGROK_DOMAIN -httpAddr=":80"
+	/usr/local/ngrok/ngrok-server/ngrok/bin/ngrokd -domain=$NGROK_DOMAIN -httpAddr=":80"
 }
 
 # 卸载ngrok
@@ -140,16 +141,16 @@ client(){
 		[3] )
 			compile_client windows 386
 		;;
-		[4] ) 
+		[4] )
 			compile_client windows amd64
 		;;
-		[5] ) 
+		[5] )
 			compile_client darwin 386
 		;;
-		[6] ) 
+		[6] )
 			compile_client darwin amd64
 		;;
-		[7] ) 
+		[7] )
 			compile_client linux arm
 		;;
 		*) echo "选择错误，退出";;
