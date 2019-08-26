@@ -11,8 +11,7 @@
 SELFPATH=$(cd "$(dirname "$0")"; pwd)
 GOOS=`go env | grep GOOS | awk -F\" '{print $2}'`
 GOARCH=`go env | grep GOARCH | awk -F\" '{print $2}'`
-echo '请输入一个域名'
-read DOMAIN
+
 install_yilai(){
 	yum -y install zlib-devel openssl-devel perl hg cpio expat-devel gettext-devel curl curl-devel perl-ExtUtils-MakeMaker hg wget gcc gcc-c++ unzip
 }
@@ -79,6 +78,8 @@ uninstall_go(){
 
 # 安装ngrok
 install_ngrok(){
+  echo '请输入一个域名'
+  read DOMAIN
 	uninstall_ngrok
 	_NGROK_BASE_PATH="/usr/local/ngrok/ngrok-server/"
 	cd ${_NGROK_BASE_PATH}
