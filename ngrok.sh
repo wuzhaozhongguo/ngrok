@@ -88,7 +88,7 @@ install_ngrok(){
 	unzip ngrok.zip
 	export GOPATH=${_NGROK_BASE_PATH}
 	export NGROK_DOMAIN=$DOMAIN
-	cd ngrok
+	cd ${_NGROK_BASE_PATH}/ngrok
 	openssl genrsa -out rootCA.key 2048
 	openssl req -x509 -new -nodes -key rootCA.key -subj "/CN=$NGROK_DOMAIN" -days 5000 -out rootCA.pem
 	openssl genrsa -out server.key 2048
