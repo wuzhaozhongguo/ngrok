@@ -81,11 +81,11 @@ uninstall_go(){
 install_ngrok(){
 	uninstall_ngrok
 	_NGROK_BASE_PATH="/usr/local/ngrok/ngrok-server/"
-	cd /usr/local
+	cd ${_NGROK_BASE_PATH}
 	if [ ! -f "${_NGROK_BASE_PATH}/ngrok.zip" ];then
-		cd ${_NGROK_BASE_PATH}
 		wget http://www.sunnyos.com/ngrok.zip
 	fi
+	cd
 	unzip ngrok.zip
 	export GOPATH=${_NGROK_BASE_PATH}
 	export NGROK_DOMAIN=$DOMAIN
